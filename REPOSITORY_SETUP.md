@@ -39,7 +39,7 @@ villages-event-scraper/
 ├── .gitignore                     # Git ignore rules
 ├── CHANGELOG.md                   # Version history
 ├── CONTRIBUTING.md                # Contribution guidelines
-├── LICENSE                        # MIT License
+├── LICENSE                        # GPL v3 License
 ├── Makefile                       # Build automation
 ├── PROJECT_STATUS.md              # Project status and roadmap
 ├── pyproject.toml                 # Python project configuration
@@ -81,7 +81,7 @@ villages-event-scraper/
 - ✅ `.github/workflows/ci.yml` - GitHub Actions CI/CD pipeline
 
 ### Legal
-- ✅ `LICENSE` - MIT License
+- ✅ `LICENSE` - GPL v3 License
 
 ## 🎯 Features Implemented
 

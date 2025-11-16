@@ -1,7 +1,7 @@
 # The Villages Event Scraper
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 A Python application that fetches entertainment events from The Villages API and outputs formatted event data. This tool replaces the original bash shell script (`villages_square_events.sh`) with a more maintainable, well-structured Python implementation that offers better error handling, multiple output formats, and comprehensive documentation.
@@ -672,9 +672,52 @@ To add a new output format:
 3. Add the format name to `VALID_FORMATS` in `src/config.py`
 4. Update this README with usage examples
 
+## Versioning
+
+This project follows [Semantic Versioning](https://semver.org/). Check the current version:
+
+```bash
+python villages_events.py --version
+```
+
+See [CHANGELOG.md](CHANGELOG.md) for version history and [docs/VERSIONING.md](docs/VERSIONING.md) for detailed versioning information.
+
+## Contributing
+
+Contributions are welcome! Please see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
+
+### Quick Start for Contributors
+
+```bash
+# Install development dependencies
+pip install -r requirements-dev.txt
+
+# Run tests
+python -m unittest discover tests -v
+
+# Format code
+black .
+
+# Run linting
+pylint src/ villages_events.py
+```
+
+## Dependency Management
+
+This project uses [Renovate](https://github.com/renovatebot/renovate) to automatically keep dependencies up to date. Renovate will:
+
+- Check for updates weekly
+- Create PRs for dependency updates
+- Auto-merge minor and patch updates after CI passes
+- Require manual review for major updates
+
+See [docs/VERSIONING.md](docs/VERSIONING.md) for more information.
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 ## Contributing
 

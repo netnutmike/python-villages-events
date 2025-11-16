@@ -3,6 +3,21 @@
 Villages Event Scraper - Main entry point
 
 Fetches entertainment events from The Villages API and outputs formatted event data.
+
+Copyright (C) 2025
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import sys
@@ -17,6 +32,7 @@ from src.api_client import fetch_events
 from src.event_processor import EventProcessor
 from src.output_formatter import OutputFormatter
 from src.exceptions import VillagesEventError
+from src.__version__ import __version__
 
 
 def main() -> int:
@@ -42,7 +58,13 @@ def main() -> int:
     
     # Parse command-line arguments
     parser = argparse.ArgumentParser(
-        description='Fetch and format entertainment events from The Villages API'
+        description='Fetch and format entertainment events from The Villages API',
+        epilog=f'Version {__version__}'
+    )
+    parser.add_argument(
+        '--version',
+        action='version',
+        version=f'%(prog)s {__version__}'
     )
     parser.add_argument(
         '--format',

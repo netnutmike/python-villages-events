@@ -1,0 +1,123 @@
+// Renovate configuration with comments (JSON5 format)
+// This is an alternative to renovate.json with more detailed comments
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  
+  // Extend base configuration presets
+  "extends": [
+    "config:base",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":separateMajorReleases"
+  ],
+  
+  // Schedule updates for Monday mornings
+  "schedule": [
+    "before 6am on Monday"
+  ],
+  
+  // Timezone for scheduling
+  "timezone": "America/New_York",
+  
+  // Labels to apply to PRs
+  "labels": ["dependencies", "renovate"],
+  
+  // Limit concurrent PRs
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  
+  // Commit message configuration
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  
+  // Enable semantic commits
+  "semanticCommits": "enabled",
+  
+  // Separate major/minor updates
+  "separateMajorMinor": true,
+  "separateMinorPatch": false,
+  
+  // Version strategy
+  "rangeStrategy": "bump",
+  
+  // Python-specific configuration
+  "python": {
+    "enabled": true
+  },
+  
+  // File patterns for Python dependencies
+  "pip_requirements": {
+    "fileMatch": [
+      "^requirements\\.txt$",
+      "^requirements-dev\\.txt$"
+    ]
+  },
+  
+  "pip_setup": {
+    "fileMatch": ["^setup\\.py$"]
+  },
+  
+  // Package rules for auto-merging
+  "packageRules": [
+    {
+      // Auto-merge minor and patch updates for stable packages
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      // Auto-merge dev dependencies
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      // Group all pytest-related packages
+      "matchPackagePatterns": ["^pytest"],
+      "groupName": "pytest packages",
+      "automerge": true
+    },
+    {
+      // Security updates - high priority
+      "matchUpdateTypes": ["patch"],
+      "matchCurrentVersion": "!/^0/",
+      "labels": ["dependencies", "security"],
+      "automerge": true,
+      "schedule": ["at any time"]
+    },
+    {
+      // Major updates - require manual review
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "major-update"],
+      "reviewers": []
+    }
+  ],
+  
+  // Vulnerability alerts
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security", "vulnerability"],
+    "assignees": [],
+    "reviewers": [],
+    "schedule": ["at any time"]
+  },
+  
+  // Ignore specific packages or versions
+  "ignoreDeps": [],
+  
+  // Post-upgrade tasks (run tests)
+  "postUpgradeTasks": {
+    "commands": [
+      "python -m unittest discover tests"
+    ],
+    "fileFilters": ["**/*"],
+    "executionMode": "branch"
+  }
+}

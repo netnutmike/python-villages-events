@@ -53,7 +53,7 @@ Welcome to the Villages Event Scraper documentation!
 ## Project Information
 
 - **[Changelog](../CHANGELOG.md)** - Version history and changes
-- **[License](../LICENSE)** - MIT License
+- **[License](../LICENSE)** - GPL v3 License
 - **[Project Status](../PROJECT_STATUS.md)** - Current status and roadmap
 
 ## Quick Links
@@ -89,7 +89,7 @@ Root directory:
 ├── README.md           # Main project documentation
 ├── CONTRIBUTING.md     # Contribution guidelines
 ├── CHANGELOG.md        # Version history
-├── LICENSE             # MIT License
+├── LICENSE             # GPL v3 License
 └── PROJECT_STATUS.md   # Current status and roadmap
 ```
 
