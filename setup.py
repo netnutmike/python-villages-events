@@ -24,6 +24,7 @@ setup(
     url="https://github.com/yourusername/villages-event-scraper",
     packages=['src'],
     package_dir={'src': 'src'},
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",

@@ -10,7 +10,7 @@ import json
 import sys
 from io import StringIO
 
-from villages_events import main
+from src.villages_events import main
 from src.config import Config
 from src.exceptions import TokenFetchError, SessionError, APIError
 

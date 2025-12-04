@@ -20,12 +20,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from pathlib import Path
 
-# Read version from VERSION file
-_version_file = Path(__file__).parent.parent / "VERSION"
-with open(_version_file, "r", encoding="utf-8") as _f:
-    __version__ = _f.read().strip()
+# Try to read version from VERSION file (for development)
+# Fall back to hardcoded version (for installed package)
+try:
+    _version_file = Path(__file__).parent.parent / "VERSION"
+    with open(_version_file, "r", encoding="utf-8") as _f:
+        __version__ = _f.read().strip()
+except FileNotFoundError:
+    # Fallback version when VERSION file is not available (installed package)
+    __version__ = "1.0.0"
 
 __title__ = "villages-event-scraper"
 __description__ = "Fetch and format entertainment events from The Villages API"
-__author__ = "Your Name"
+__author__ = "Mike Myers"
 __license__ = "GPL-3.0-or-later"

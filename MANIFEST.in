@@ -1,0 +1,25 @@
+# Include version file
+include VERSION
+
+# Include license and readme
+include LICENSE
+include README.md
+include CHANGELOG.md
+
+# Include configuration examples
+include config.yaml.example
+
+# Include requirements
+include requirements.txt
+include requirements-dev.txt
+
+# Exclude unnecessary files
+exclude .gitignore
+exclude .editorconfig
+exclude .flake8
+exclude Makefile
+recursive-exclude tests *
+recursive-exclude docs *
+recursive-exclude scripts *
+recursive-exclude .github *
+recursive-exclude .kiro *

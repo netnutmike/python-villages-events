@@ -5,7 +5,7 @@ from unittest.mock import patch, Mock
 import sys
 from io import StringIO
 
-from villages_events import main
+from src.villages_events import main
 
 
 class TestPreamble(unittest.TestCase):
