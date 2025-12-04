@@ -55,6 +55,7 @@ def main() -> int:
     default_date_range = ConfigLoader.get_default(yaml_config, 'date_range', Config.DEFAULT_DATE_RANGE)
     default_category = ConfigLoader.get_default(yaml_config, 'category', Config.DEFAULT_CATEGORY)
     default_location = ConfigLoader.get_default(yaml_config, 'location', Config.DEFAULT_LOCATION)
+    default_preamble = ConfigLoader.get_default(yaml_config, 'preamble', Config.DEFAULT_PREAMBLE)
     
     # Parse command-line arguments
     parser = argparse.ArgumentParser(
@@ -104,6 +105,12 @@ def main() -> int:
         '--fields',
         type=str,
         help='Comma-separated list of field names to include in output (e.g., "location.title,title,start.date")'
+    )
+    parser.add_argument(
+        '-p', '--preamble',
+        type=str,
+        default=default_preamble,
+        help=f'Preamble string to prefix output (default: {repr(default_preamble)})'
     )
     
     try:
@@ -199,6 +206,9 @@ def main() -> int:
             )
             
             # Step 6: Print formatted output to stdout
+            # Add preamble if provided
+            if args.preamble:
+                print(args.preamble, end='')
             print(formatted_output, end='')
         
         # Success

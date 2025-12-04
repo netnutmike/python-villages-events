@@ -67,6 +67,15 @@ venue_mappings:
 # HTTP timeout in seconds
 timeout: 10
 
+# Preamble string to prefix output
+# Useful for adding headers, labels, or formatting before the event data
+# Default: "" (empty string, no preamble)
+# Examples:
+#   preamble: "Events:\n"
+#   preamble: "Today's Schedule: "
+#   preamble: "=== Villages Events ===\n"
+preamble: ""
+
 # Example configurations:
 
 # Example 1: Detailed event information with times and location

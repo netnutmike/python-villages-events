@@ -91,6 +91,9 @@ class Config:
     VALID_FORMATS = ["meshtastic", "json", "csv", "plain"]
     DEFAULT_FORMAT = "meshtastic"
     
+    # Preamble
+    DEFAULT_PREAMBLE = ""
+    
     # Output fields configuration
     # Default fields maintain backward compatibility with original implementation
     DEFAULT_OUTPUT_FIELDS = ["location.title", "title"]

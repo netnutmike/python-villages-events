@@ -322,12 +322,42 @@ python villages_events.py --fields location.title,title --format plain
 
 When no `--fields` argument is provided and no `output_fields` is set in the configuration file, the application defaults to `location.title,title` to maintain backward compatibility with the original implementation.
 
+### Adding a Preamble
+
+You can add a preamble string before the output using the `-p` or `--preamble` option. This is useful for adding headers, labels, or formatting:
+
+```bash
+# Add a simple label
+python villages_events.py --preamble "Today's Events: "
+
+# Add a header with newline
+python villages_events.py --preamble "=== Villages Events ===\n" --format json
+
+# Add multiple lines
+python villages_events.py -p "Schedule\n--------\n" --format plain
+
+# Combine with other options
+python villages_events.py --date-range tomorrow --preamble "Tomorrow: " --format meshtastic
+```
+
+The preamble can also be set in the configuration file:
+
+```yaml
+# config.yaml
+preamble: "Events:\n"
+```
+
+Command-line `--preamble` argument will override the configuration file setting.
+
 ### Redirecting Output
 
 Save output to a file:
 ```bash
 python villages_events.py --format json > events.json
 python villages_events.py --format csv > events.csv
+
+# With preamble
+python villages_events.py --preamble "# Events Report\n" --format csv > events.csv
 ```
 
 ### Raw Output (Debugging)
