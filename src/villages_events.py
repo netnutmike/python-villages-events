@@ -24,15 +24,15 @@ import sys
 import argparse
 import logging
 
-from src.config import Config
-from src.config_loader import ConfigLoader
-from src.token_fetcher import fetch_auth_token
-from src.session_manager import SessionManager
-from src.api_client import fetch_events
-from src.event_processor import EventProcessor
-from src.output_formatter import OutputFormatter
-from src.exceptions import VillagesEventError
-from src.__version__ import __version__
+from .config import Config
+from .config_loader import ConfigLoader
+from .token_fetcher import fetch_auth_token
+from .session_manager import SessionManager
+from .api_client import fetch_events
+from .event_processor import EventProcessor
+from .output_formatter import OutputFormatter
+from .exceptions import VillagesEventError
+from .__version__ import __version__
 
 
 def main() -> int:

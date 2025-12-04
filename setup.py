@@ -22,7 +22,8 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/yourusername/villages-event-scraper",
-    packages=find_packages(),
+    packages=['src'],
+    package_dir={'src': 'src'},
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
@@ -37,7 +38,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "villages-events=villages_events:main",
+            "villages-events=src.villages_events:main",
         ],
     },
 )

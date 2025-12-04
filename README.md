@@ -22,31 +22,74 @@ The Villages Event Scraper retrieves today's entertainment events at The Village
 
 ## Installation
 
-1. Clone or download this repository
+### Option 1: Install as a Command-Line Tool (Recommended)
 
-2. Install dependencies:
+Install the package so you can run it from anywhere without `python` prefix:
+
 ```bash
-pip install -r requirements.txt
+# Clone the repository
+git clone https://github.com/yourusername/villages-event-scraper.git
+cd villages-event-scraper
+
+# Install in editable mode (for development)
+pip install -e .
+
+# Or install normally
+pip install .
 ```
 
-The `requirements.txt` file includes:
+After installation, you can run the command from anywhere:
+```bash
+villages-events
+villages-events --help
+villages-events --format json
+```
+
+### Option 2: Run Directly with Python
+
+If you prefer not to install:
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/villages-event-scraper.git
+cd villages-event-scraper
+
+# Install dependencies only
+pip install -r requirements.txt
+
+# Run with python
+villages-events
+```
+
+### Dependencies
+
+The application requires:
 - `requests` - HTTP library for API requests and session management
 - `pyyaml` - YAML parser for configuration file support
 
-3. (Optional) Create a configuration file:
+### Configuration (Optional)
+
+Create a configuration file to set your preferred defaults:
 ```bash
 cp config.yaml.example config.yaml
-# Edit config.yaml to set your preferred defaults
+# Edit config.yaml to customize settings
 ```
 
 ## Usage
 
 ### Basic Usage
 
-Run the script with default settings (today's events in Meshtastic format):
+**If installed as a command:**
 ```bash
-python villages_events.py
+villages-events
 ```
+
+**If running with Python:**
+```bash
+villages-events
+```
+
+For the rest of this documentation, examples will use `villages-events` (installed command). If you're running with Python, replace `villages-events` with `villages-events`.
 
 ### Command-Line Options
 
@@ -57,13 +100,13 @@ The application supports two main options:
 Specify which events to fetch using the `--date-range` option:
 
 ```bash
-python villages_events.py --date-range today        # Today's events (default)
-python villages_events.py --date-range tomorrow     # Tomorrow's events
-python villages_events.py --date-range this-week    # This week's events
-python villages_events.py --date-range next-week    # Next week's events
-python villages_events.py --date-range this-month   # This month's events
-python villages_events.py --date-range next-month   # Next month's events
-python villages_events.py --date-range all          # All events (no date filter)
+villages-events --date-range today        # Today's events (default)
+villages-events --date-range tomorrow     # Tomorrow's events
+villages-events --date-range this-week    # This week's events
+villages-events --date-range next-week    # Next week's events
+villages-events --date-range this-month   # This month's events
+villages-events --date-range next-month   # Next month's events
+villages-events --date-range all          # All events (no date filter)
 ```
 
 #### Category Option
@@ -71,14 +114,14 @@ python villages_events.py --date-range all          # All events (no date filter
 Filter events by category using the `--category` option:
 
 ```bash
-python villages_events.py --category entertainment      # Entertainment events (default)
-python villages_events.py --category arts-and-crafts    # Arts and crafts events
-python villages_events.py --category health-and-wellness # Health and wellness events
-python villages_events.py --category recreation         # Recreation events
-python villages_events.py --category social-clubs       # Social club events
-python villages_events.py --category special-events     # Special events
-python villages_events.py --category sports             # Sports events
-python villages_events.py --category all                # All categories (no filter)
+villages-events --category entertainment      # Entertainment events (default)
+villages-events --category arts-and-crafts    # Arts and crafts events
+villages-events --category health-and-wellness # Health and wellness events
+villages-events --category recreation         # Recreation events
+villages-events --category social-clubs       # Social club events
+villages-events --category special-events     # Special events
+villages-events --category sports             # Sports events
+villages-events --category all                # All categories (no filter)
 ```
 
 #### Location Option
@@ -86,14 +129,14 @@ python villages_events.py --category all                # All categories (no fil
 Filter events by location using the `--location` option:
 
 ```bash
-python villages_events.py --location town-squares                           # Town squares (default)
-python villages_events.py --location Brownwood+Paddock+Square               # Brownwood Paddock Square
-python villages_events.py --location Spanish+Springs+Town+Square            # Spanish Springs Town Square
-python villages_events.py --location Lake+Sumter+Landing+Market+Square      # Lake Sumter Landing
-python villages_events.py --location Sawgrass+Grove                         # Sawgrass Grove
-python villages_events.py --location The+Sharon                             # The Sharon
-python villages_events.py --location sports-recreation                      # Sports & recreation venues
-python villages_events.py --location all                                    # All locations (no filter)
+villages-events --location town-squares                           # Town squares (default)
+villages-events --location Brownwood+Paddock+Square               # Brownwood Paddock Square
+villages-events --location Spanish+Springs+Town+Square            # Spanish Springs Town Square
+villages-events --location Lake+Sumter+Landing+Market+Square      # Lake Sumter Landing
+villages-events --location Sawgrass+Grove                         # Sawgrass Grove
+villages-events --location The+Sharon                             # The Sharon
+villages-events --location sports-recreation                      # Sports & recreation venues
+villages-events --location all                                    # All locations (no filter)
 ```
 
 See `--help` for the complete list of 15 location options.
@@ -105,7 +148,7 @@ The application supports multiple output formats via the `--format` option:
 #### Meshtastic Format (Default)
 Compact format optimized for Meshtastic messaging:
 ```bash
-python villages_events.py --format meshtastic
+villages-events --format meshtastic
 ```
 
 Output example:
@@ -118,7 +161,7 @@ Format: `venue1,title1#venue2,title2#` (hash-delimited with trailing #)
 #### JSON Format
 Structured JSON array output:
 ```bash
-python villages_events.py --format json
+villages-events --format json
 ```
 
 Output example:
@@ -133,7 +176,7 @@ Output example:
 #### CSV Format
 Comma-separated values with headers:
 ```bash
-python villages_events.py --format csv
+villages-events --format csv
 ```
 
 Output example:
@@ -147,7 +190,7 @@ Sawgrass,The Band
 #### Plain Text Format
 Human-readable format, one event per line:
 ```bash
-python villages_events.py --format plain
+villages-events --format plain
 ```
 
 Output example:
@@ -166,7 +209,7 @@ The application allows you to customize which fields from the API response are i
 Specify custom fields using the `--fields` command-line argument with a comma-separated list:
 
 ```bash
-python villages_events.py --fields location.title,title,start.date
+villages-events --fields location.title,title,start.date
 ```
 
 #### Available Fields
@@ -204,7 +247,7 @@ The following fields can be included in your output using dot notation for neste
 
 **Example 1: Basic event listing with start time**
 ```bash
-python villages_events.py --fields location.title,title,start.date --format json
+villages-events --fields location.title,title,start.date --format json
 ```
 
 Output:
@@ -220,7 +263,7 @@ Output:
 
 **Example 2: Detailed event information**
 ```bash
-python villages_events.py --fields title,location.title,start.date,description,url --format plain
+villages-events --fields title,location.title,start.date,description,url --format plain
 ```
 
 Output:
@@ -230,7 +273,7 @@ title: John Doe Band, location.title: Brownwood, start.date: 2025-11-14T22:00:00
 
 **Example 3: Event with full address**
 ```bash
-python villages_events.py --fields location.title,title,address.streetAddress,address.locality,address.region --format csv
+villages-events --fields location.title,title,address.streetAddress,address.locality,address.region --format csv
 ```
 
 Output:
@@ -241,7 +284,7 @@ Brownwood,John Doe Band,1101 Canal Street,The Villages,FL
 
 **Example 4: Meshtastic format with custom fields**
 ```bash
-python villages_events.py --fields title,start.date --format meshtastic
+villages-events --fields title,start.date --format meshtastic
 ```
 
 Output:
@@ -253,7 +296,7 @@ John Doe Band,2025-11-14T22:00:00.000Z#Jane Smith,2025-11-14T23:00:00.000Z#
 
 **Example 5: Event category and featured status**
 ```bash
-python villages_events.py --fields location.title,title,category,featured --format json
+villages-events --fields location.title,title,category,featured --format json
 ```
 
 Output:
@@ -282,7 +325,7 @@ output_fields:
 
 Then simply run:
 ```bash
-python villages_events.py --format json
+villages-events --format json
 ```
 
 Command-line `--fields` argument will override the configuration file setting.
@@ -292,30 +335,30 @@ Command-line `--fields` argument will override the configuration file setting.
 **For Meshtastic messaging (compact format):**
 ```bash
 # Default: venue and title
-python villages_events.py --format meshtastic
+villages-events --format meshtastic
 
 # With start time
-python villages_events.py --fields location.title,start.date --format meshtastic
+villages-events --fields location.title,start.date --format meshtastic
 ```
 
 **For event calendars:**
 ```bash
-python villages_events.py --fields title,location.title,start.date,end.date,description --format json
+villages-events --fields title,location.title,start.date,end.date,description --format json
 ```
 
 **For location-based apps:**
 ```bash
-python villages_events.py --fields title,location.title,address.streetAddress,address.locality,url --format csv
+villages-events --fields title,location.title,address.streetAddress,address.locality,url --format csv
 ```
 
 **For event discovery:**
 ```bash
-python villages_events.py --fields title,excerpt,category,location.title,image,url --format json
+villages-events --fields title,excerpt,category,location.title,image,url --format json
 ```
 
 **For simple listings:**
 ```bash
-python villages_events.py --fields location.title,title --format plain
+villages-events --fields location.title,title --format plain
 ```
 
 #### Backward Compatibility
@@ -328,16 +371,16 @@ You can add a preamble string before the output using the `-p` or `--preamble` o
 
 ```bash
 # Add a simple label
-python villages_events.py --preamble "Today's Events: "
+villages-events --preamble "Today's Events: "
 
 # Add a header with newline
-python villages_events.py --preamble "=== Villages Events ===\n" --format json
+villages-events --preamble "=== Villages Events ===\n" --format json
 
 # Add multiple lines
-python villages_events.py -p "Schedule\n--------\n" --format plain
+villages-events -p "Schedule\n--------\n" --format plain
 
 # Combine with other options
-python villages_events.py --date-range tomorrow --preamble "Tomorrow: " --format meshtastic
+villages-events --date-range tomorrow --preamble "Tomorrow: " --format meshtastic
 ```
 
 The preamble can also be set in the configuration file:
@@ -353,11 +396,11 @@ Command-line `--preamble` argument will override the configuration file setting.
 
 Save output to a file:
 ```bash
-python villages_events.py --format json > events.json
-python villages_events.py --format csv > events.csv
+villages-events --format json > events.json
+villages-events --format csv > events.csv
 
 # With preamble
-python villages_events.py --preamble "# Events Report\n" --format csv > events.csv
+villages-events --preamble "# Events Report\n" --format csv > events.csv
 ```
 
 ### Raw Output (Debugging)
@@ -365,7 +408,7 @@ python villages_events.py --preamble "# Events Report\n" --format csv > events.c
 For debugging or exploring the API response structure, use the `--raw` flag to output the unprocessed API response:
 
 ```bash
-python villages_events.py --raw
+villages-events --raw
 ```
 
 This outputs the complete JSON response from the API, including all fields and metadata. Useful for:
@@ -380,19 +423,19 @@ This outputs the complete JSON response from the API, including all fields and m
 You can combine date range, category, location, format, and fields options:
 ```bash
 # Get next week's entertainment events in JSON format
-python villages_events.py --date-range next-week --format json
+villages-events --date-range next-week --format json
 
 # Get tomorrow's sports events at Brownwood in CSV format with custom fields
-python villages_events.py --date-range tomorrow --category sports --location Brownwood+Paddock+Square --format csv --fields location.title,title,start.date
+villages-events --date-range tomorrow --category sports --location Brownwood+Paddock+Square --format csv --fields location.title,title,start.date
 
 # Get all recreation events (any date, any location) in plain text format
-python villages_events.py --date-range all --category recreation --location all --format plain
+villages-events --date-range all --category recreation --location all --format plain
 
 # Get today's arts and crafts events at Sawgrass Grove with detailed information
-python villages_events.py --category arts-and-crafts --location Sawgrass+Grove --fields title,location.title,description,url --format json
+villages-events --category arts-and-crafts --location Sawgrass+Grove --fields title,location.title,description,url --format json
 
 # Get this week's events from all categories at Spanish Springs with times
-python villages_events.py --date-range this-week --category all --location Spanish+Springs+Town+Square --fields location.title,title,start.date,end.date --format csv
+villages-events --date-range this-week --category all --location Spanish+Springs+Town+Square --fields location.title,title,start.date,end.date --format csv
 ```
 
 ### Integration with Shell Scripts
@@ -401,11 +444,11 @@ Use in shell scripts or pipelines:
 ```bash
 #!/bin/bash
 # Get today's events
-events=$(python villages_events.py --format meshtastic)
+events=$(villages-events --format meshtastic)
 echo "Today's events: $events"
 
 # Get this week's events in JSON
-python villages_events.py --date-range this-week --format json > this_week.json
+villages-events --date-range this-week --format json > this_week.json
 ```
 
 ## Configuration
@@ -453,9 +496,9 @@ timeout: 15
 **Example:**
 ```bash
 # With config.yaml setting format: json and category: sports
-python villages_events.py                    # Uses JSON format and sports category
-python villages_events.py --format csv       # Overrides to CSV, still uses sports category
-python villages_events.py --category all     # Uses JSON format, overrides to all categories
+villages-events                    # Uses JSON format and sports category
+villages-events --format csv       # Overrides to CSV, still uses sports category
+villages-events --category all     # Uses JSON format, overrides to all categories
 ```
 
 ### Output Fields Configuration
@@ -634,7 +677,7 @@ The application follows a pipeline architecture:
 
 **Solutions**:
 1. Ensure the script has execute permissions: `chmod +x villages_events.py`
-2. Or run with: `python villages_events.py`
+2. Or run with: `villages-events`
 
 ## Development
 
@@ -707,7 +750,7 @@ To add a new output format:
 This project follows [Semantic Versioning](https://semver.org/). Check the current version:
 
 ```bash
-python villages_events.py --version
+villages-events --version
 ```
 
 See [CHANGELOG.md](CHANGELOG.md) for version history and [docs/VERSIONING.md](docs/VERSIONING.md) for detailed versioning information.
