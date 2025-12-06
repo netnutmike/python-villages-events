@@ -59,8 +59,8 @@ class TestPreamble(unittest.TestCase):
         # Verify exit code
         self.assertEqual(exit_code, 0)
         
-        # Verify preamble is at the beginning
-        self.assertTrue(output.startswith("Events: "))
+        # Verify preamble is at the beginning with # separator (meshtastic format)
+        self.assertTrue(output.startswith("Events: #"))
         
         # Verify event data follows preamble
         self.assertIn("Brownwood,Test Event#", output)
@@ -227,6 +227,48 @@ class TestPreamble(unittest.TestCase):
     @patch('src.api_client.requests.Session.get')
     @patch('src.session_manager.requests.Session.get')
     @patch('src.token_fetcher.requests.get')
+    @patch('sys.argv', ['villages_events.py', '--preamble', 'Events:#'])
+    def test_preamble_with_hash_separator(self, mock_token_get, mock_session_get, mock_api_get):
+        """Test preamble ending with # doesn't get extra separator."""
+        # Mock token fetch
+        mock_token_response = Mock()
+        mock_token_response.text = self.mock_js_content
+        mock_token_response.raise_for_status = Mock()
+        mock_token_get.return_value = mock_token_response
+        
+        # Mock session establishment
+        mock_session_response = Mock()
+        mock_session_response.raise_for_status = Mock()
+        mock_session_get.return_value = mock_session_response
+        
+        # Mock API request
+        mock_api_response = Mock()
+        mock_api_response.status_code = 200
+        mock_api_response.json.return_value = self.mock_api_response
+        mock_api_get.return_value = mock_api_response
+        
+        # Capture stdout
+        captured_output = StringIO()
+        sys.stdout = captured_output
+        
+        try:
+            exit_code = main()
+            output = captured_output.getvalue()
+        finally:
+            sys.stdout = sys.__stdout__
+        
+        # Verify exit code
+        self.assertEqual(exit_code, 0)
+        
+        # Verify preamble with # and no extra separator
+        self.assertTrue(output.startswith("Events:#"))
+        
+        # Verify no double ## separator
+        self.assertNotIn("Events:##", output)
+
+    @patch('src.api_client.requests.Session.get')
+    @patch('src.session_manager.requests.Session.get')
+    @patch('src.token_fetcher.requests.get')
     @patch('sys.argv', ['villages_events.py', '--preamble', 'Header: ', '--format', 'csv'])
     def test_preamble_with_csv_format(self, mock_token_get, mock_session_get, mock_api_get):
         """Test preamble with CSV format."""
@@ -260,8 +302,8 @@ class TestPreamble(unittest.TestCase):
         # Verify exit code
         self.assertEqual(exit_code, 0)
         
-        # Verify preamble before CSV
-        self.assertTrue(output.startswith("Header: "))
+        # Verify preamble before CSV with separator
+        self.assertTrue(output.startswith("Header: \n"))
         
         # Verify CSV follows
         self.assertIn("location.title,title", output)

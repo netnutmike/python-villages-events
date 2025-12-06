@@ -370,18 +370,20 @@ When no `--fields` argument is provided and no `output_fields` is set in the con
 You can add a preamble string before the output using the `-p` or `--preamble` option. This is useful for adding headers, labels, or formatting:
 
 ```bash
-# Add a simple label
-villages-events --preamble "Today's Events: "
+# Add a simple label (automatically adds newline separator)
+villages-events --preamble "Today's Events:"
 
-# Add a header with newline
+# Add a header with newline (no extra separator added)
 villages-events --preamble "=== Villages Events ===\n" --format json
 
 # Add multiple lines
 villages-events -p "Schedule\n--------\n" --format plain
 
 # Combine with other options
-villages-events --date-range tomorrow --preamble "Tomorrow: " --format meshtastic
+villages-events --date-range tomorrow --preamble "Tomorrow:" --format meshtastic
 ```
+
+**Note:** If your preamble doesn't end with a newline (`\n`), a newline separator will be automatically added between the preamble and the output.
 
 The preamble can also be set in the configuration file:
 

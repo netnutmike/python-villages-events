@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2025-12-05
+
+### Added
+- Preamble feature: Add custom text before output using `-p, --preamble` option
+- Automatic separator between preamble and output (adds newline if preamble doesn't end with one)
+- Preamble support in configuration file
+- Comprehensive preamble tests (6 new tests)
+
+### Changed
+- License changed from MIT to GPL v3
+- Added GPL headers to all source files
+- Improved installation methods (wrapper script, module execution, pip installation)
+- Enhanced documentation with installation guide and usage notes
+
+### Fixed
+- VERSION file not found error when package is installed (added MANIFEST.in and fallback version)
+- Import paths updated for new src/ directory structure
+
 ## [1.0.0] - 2025-11-16
 
 ### Added
@@ -27,5 +45,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Secure token fetching and session management
 - Input validation for all user-provided parameters
 
-[Unreleased]: https://github.com/yourusername/villages-event-scraper/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/yourusername/villages-event-scraper/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/yourusername/villages-event-scraper/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/yourusername/villages-event-scraper/releases/tag/v1.0.0

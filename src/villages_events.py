@@ -209,6 +209,16 @@ def main() -> int:
             # Add preamble if provided
             if args.preamble:
                 print(args.preamble, end='')
+                # Add separator based on format type
+                # Meshtastic uses # separator, other formats use newline
+                if args.format == 'meshtastic':
+                    # For meshtastic, add # separator if preamble doesn't end with it
+                    if not args.preamble.endswith('#'):
+                        print('#', end='')
+                else:
+                    # For other formats, add newline if preamble doesn't end with one
+                    if not args.preamble.endswith('\n'):
+                        print()
             print(formatted_output, end='')
         
         # Success

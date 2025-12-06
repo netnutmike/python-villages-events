@@ -16,21 +16,23 @@ Added the ability to prefix output with a custom preamble string using the `-p, 
 ### Usage Examples
 
 ```bash
-# Simple label
-python villages_events.py --preamble "Events: "
+# Simple label (automatically adds newline separator)
+python villages_events.py --preamble "Events:"
 
-# Header with newline
+# Header with newline (no extra separator added)
 python villages_events.py --preamble "=== Today's Events ===\n" --format json
 
 # Short option
-python villages_events.py -p "Schedule: " --format meshtastic
+python villages_events.py -p "Schedule:" --format meshtastic
 
 # Multiple lines
 python villages_events.py -p "Report\n------\n" --format csv
 
 # Combined with other options
-python villages_events.py --date-range tomorrow --preamble "Tomorrow: "
+python villages_events.py --date-range tomorrow --preamble "Tomorrow:"
 ```
+
+**Separator Behavior:** If the preamble doesn't end with a newline (`\n`), a newline separator is automatically added between the preamble and the output.
 
 ### Configuration File Support
 
